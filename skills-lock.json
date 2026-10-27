@@ -13,6 +13,18 @@
       "skillPath": "skills/bmad-build/SKILL.md",
       "computedHash": "0d6f25b5d6d6cf56280bfbc852fff218ae6e28e177a7ea62b9d5b787cc883cf4"
     },
+    "bmad-party-mode": {
+      "source": "bmad-code-org/BMAD-METHOD",
+      "sourceType": "github",
+      "skillPath": "skills/bmad-party-mode/SKILL.md",
+      "computedHash": "717a8d35664efa716b0d9e2c80bda0d8fb34ffb466ed1838a21ddb1db9846591"
+    },
+    "bmad-prd": {
+      "source": "bmad-code-org/BMAD-METHOD",
+      "sourceType": "github",
+      "skillPath": "skills/bmad-prd/SKILL.md",
+      "computedHash": "0f4dd301570a625935938b2cc81542514fa1691b1eac6e165de7ba75e60ee00a"
+    },
     "bmod-core-tools": {
       "source": "bmad-code-org/BMAD-METHOD",
       "sourceType": "github",
