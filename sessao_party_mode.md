@@ -129,7 +129,7 @@ Isso descarta a opção B — em nenhum momento ela fala em entregar um APK para
 
 ---
 
-## Pendências acumuladas até o momento (sessão não encerrada)
+## Pendências ao final da Parte 1 (sessão não encerrada)
 
 | # | Pendência | Origem |
 |---|-----------|--------|
@@ -139,6 +139,161 @@ Isso descarta a opção B — em nenhum momento ela fala em entregar um APK para
 | 4 | Quem paga a publicação nas lojas (Play Store/Apple Store) | Pendente no transcript, pergunta feita mas não respondida |
 | 5 | "CNPJ vinculado em app único" vs. "White Label com marca própria por empresa" — mesmo modelo ou dois modelos concorrentes? | Contradição não resolvida no transcript |
 
+---
+
+## Parte 2 — continuação da sessão (mesma aula, mesma data)
+
+Reabertura com o mesmo roster. A partir daqui o grupo passou a cruzar pendências com pesquisa externa (web) e a tomar decisões explícitas, uma a uma.
+
+### 6. Pendência #1 (público-alvo) — resolvida com evidência do transcript
+
+🎙️ **Facilitador:** duas falas do transcript, lidas juntas, afastam a contradição:
+
+> "Pode ser sedentário." / "Não precisa praticar." / "Mas o público alvo é pessoas que praticam esportes." / "Isso."
+
+> "Só que tu disse que o público é qualquer pessoa que queira, pode ser a pessoa sedentária, porém o público da assessoria não é esse público." → "Não, não. Digo. Ela pode ter opção."
+
+**Conclusão:** "sedentário" é só uma opção do campo de atividade física do cadastro (pra cálculo de gasto calórico); o público-alvo comercial pelo canal da assessoria são praticantes de esporte. Considerado esclarecido pelo transcript, não mais uma contradição — mas ainda vale confirmar a leitura com a cliente real.
+
+### 7. Pergunta do grupo: prioridade entre Android e iOS
+
+🎙️ **Facilitador:** **Não há base no transcript.** Só o Android foi citado concretamente (o APK); a Apple Store só aparece junto do custo de publicação (~R$700), sem indicar prioridade. Qualquer prioridade aqui seria inferência da IA, não fato — não tratado como decisão nesse momento.
+
+### 8. Decisão do grupo: ambos os sistemas operacionais
+
+> "Precisa ter acesso aos 2 dispositivos, porque o comprador (assessoria de corrida) quer que os seus alunos tenham acesso ao app não importando o SO de cada dispositivo."
+
+Registrado como **decisão do grupo** (não dito pela cliente). Consequências levantadas: (a) reabre a pendência de quem paga a publicação, agora com duas lojas; (b) levanta lacuna nova — arquitetura multiplataforma (nativo duplicado vs. framework único) nunca discutida.
+
+### 9. Convocação do agente BMAD Winston (Arquiteto)
+
+🎙️ **Facilitador:** checagem em `.agents/skills/bmod-method/roster.toml` confirma: **Winston é um agente do método BMAD** (`bmad-agent-architect`, 🏗️ System Architect), não uma persona/stakeholder do Palpite. Skill completa não instalada; voz trazida pela persona do roster (comando de instalação, se quiserem o agente completo: `npx skills add bmad-code-org/BMAD-METHOD --skill bmad-agent-architect`).
+
+🏗️ **Winston:** trade-offs entre nativo x2 (melhor performance, dobra custo/time, mal combina com filosofia de MVP rápido da fundadora), framework cross-platform — React Native ou Flutter (um código, mais barato, mais rápido de atualizar) e PWA (já descartada pela fundadora). Recomendação inicial (não decisão): cross-platform, dado o perfil de terceirização e o desejo dela de manter controle de atualizações.
+
+### 10. Decisão do grupo: quem paga a publicação nas lojas
+
+> "Quem vai pagar a publicação vai ser a fundadora e suas sócias."
+
+Registrado como **decisão do grupo**, não confirmada pela cliente (ela nunca respondeu essa pergunta no transcript). A fundadora (voz reconstruída) levantou, em reação, que o custo dobrado (2 lojas) precisa entrar na conta do preço do pacote — nova lacuna de precificação.
+
+### 11. Pergunta do grupo: uso offline — onde o aluno estará?
+
+🎙️ **Facilitador:** **pendência total, zero dados no transcript.** Toda especulação das personas abaixo é hipótese explícita, não testemunho real:
+
+- 🏃 Aluno da assessoria (hipótese): provavelmente em casa, antes/depois do treino.
+- 🏢 Dono de assessoria (hipótese): talvez durante o treino, pra ver o palpite do dia.
+
+Recomendado registrar como pergunta aberta pra devolver à cliente real, não como requisito decidido.
+
+### 12. Pesquisa de concorrentes reais (pesquisa externa, hoje)
+
+Via `WebSearch`, identificados concorrentes reais que já fazem o "MET" ingestão recomendada vs. consumida e/ou vendem White Label B2B2C pra coaches: **Everfit**, **My PT Hub**, **FitBudd**, **Foodzilla**, **Nutritio**, **MyFitnessPal** (genérico). Nenhum menciona explicitamente considerar o perfil de renda/compra do usuário — o que sustentaria o diferencial que a fundadora alegou na entrevista, mas isso não foi validado contra esses nomes específicos com ela.
+
+Fontes: [Best White Label Fitness Apps 2026](https://hubfit.com/blog/best-white-label-fitness-apps) · [7 Nutrition Coaching Platforms 2026](https://blog.everfit.io/top-nutrition-coaching-platforms) · [White-Label Fitness App Platforms: 10 Compared](https://coachway.io/articles/branded-app-for-fitness-coaches/) · [Foodzilla White Label](https://foodzilla.com/pt/features/white-label-app) · [Nutritio White-Label](https://nutritioapp.com/white-label-nutrition-software/)
+
+### 13. Hipóteses de mercado para as pendências #3 (offline) e #5 (CNPJ único vs. White Label)
+
+**Offline (padrão MyFitnessPal):** cache local permite visualizar dados recentes; busca na base completa, novo registro e sincronização exigem internet. Proposta (hipótese, não confirmada): visualizar o último palpite funciona offline; gerar novo palpite ou editar cadastro exige internet.
+
+**CNPJ único vs. White Label (padrão de mercado):** não são mutuamente exclusivos — muitas plataformas oferecem **dois níveis**: app com marca aplicada dentro de uma base multi-tenant compartilhada (produto básico) e white label completo com listagem própria na loja (upgrade pago, ex.: My PT Hub cobra US$145+/mês por isso). 🏗️ Winston recomendou essa estrutura de dois tiers como solução de arquitetura; a fundadora (voz reconstruída) notou que o tier premium ajudaria a cobrir o custo extra de publicação.
+
+Fontes: [MyFitnessPal — acesso sem internet](https://support.myfitnesspal.com/hc/en-us/articles/360032622851-Can-I-access-MyFitnessPal-when-I-don-t-have-an-internet-connection) · [White-Label Fitness App Platforms: 10 Compared](https://coachway.io/articles/branded-app-for-fitness-coaches/)
+
+### 14. Pergunta do grupo: planos mensais e monetização
+
+**Confirmado no transcript:** assinatura por pacote, por faixa de quantidade de alunos; exemplo dado — 10 alunos por R$60 (preço de atacado); a assessoria repassa com margem (~R$10/aluno); o aluno final paga R$150–160/mês pelo pacote completo (treino + nutrição via Palpite). Venda em grupo/pacote é estratégia deliberada da fundadora pra receita recorrente: *"vender por pacote é muito mais fácil... pra ter a renda recorrente."*
+
+**Lacunas de precisão:** valor exato do limite de alunos que define o desconto por volume; quanto do R$150–160 é especificamente repasse do Palpite vs. preço do treino que já existia antes; onde entra a remuneração da nutricionista no modelo atual (parcialmente esclarecido no item 15, abaixo).
+
+### 15. Esclarecimento do grupo: a nutricionista é da própria assessoria
+
+> "A assessoria tem que ter uma nutricionista para sempre validar." / "Dentro da assessoria tem a nutricionista que vai fazer a análise." / "Eu vou ter o perfil do nutricionista, que vai estar ligado à company, à companhia."
+
+Persona renomeada: **"Nutricionista parceira" → "Nutricionista da assessoria"** — é um perfil registrado dentro da conta da assessoria (junto com gestor e alunos), não uma parceira externa do Palpite. Isso esclarece que, no escopo atual, ela é remunerada pela própria assessoria — a ideia de "nutricionista autônoma vendendo serviço direto a empresas" (mencionada pela fundadora como "versão 3") é um modelo futuro e diferente, não deve ser confundido com este perfil.
+
+### 16. Pontos de vista da legislação brasileira (pesquisa externa, hoje)
+
+- **CFN Resolução nº 760/2023 (telenutrição):** serviço de nutrição por TICs deve ser prestado exclusivamente por nutricionista com inscrição ativa no CRN; exige Termo de Consentimento Livre e Esclarecido (TCLE), assinado, antes do primeiro atendimento. Valida a arquitetura já desenhada pela fundadora (nutricionista sempre valida).
+- **LGPD (Lei 13.709/2018):** dados de saúde são dados sensíveis (Art. 5º, II); exigem consentimento específico e destacado; **é proibido compartilhar dados sensíveis de saúde entre controladores com objetivo de vantagem econômica**, salvo portabilidade consentida. 🛡️ **Especialista em LGPD:** *"Isso me faz puxar um ponto que passou batido antes: lá na entrevista, teve uma menção a um parceiro de mercado — 'O Zafarin vai pagar para você fazer a propaganda ali dentro' — ou seja, um supermercado pagando para aparecer quando o app sugere onde comprar, com base no perfil (inclusive de saúde/consumo) do aluno. Isso é exatamente o tipo de uso comercial de dado sensível de saúde que a LGPD restringe."*
+- **ANVISA (RDC 657/2022, RDC 751/2022 — Software como Dispositivo Médico):** softwares de wellness não ligados a diagnóstico/tratamento/prevenção de doença são excluídos da exigência de registro. Como o Palpite é expressamente "não diagnóstico", tende a ficar fora dessa exigência — a confirmar formalmente.
+
+Fontes: [CFN — resolução telenutrição](https://cfn.org.br/cfn-publica-resolucao-que-regulamenta-a-telenutricao/) · [LGPD — Planalto](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm) · [Proteção de dados na saúde](https://www.projuris.com.br/blog/protecao-de-dados-na-saude/) · [SaMD — ANVISA](https://telepacs.com.br/software-como-dispositivo-medico/)
+
+### 17. Requisitos formalizados a partir do achado do TCLE
+
+**RF-01 — Apresentação e aceite do TCLE antes da primeira validação nutricional**
+- Descrição: o sistema deve apresentar ao aluno o conteúdo do TCLE referente à telenutrição antes de liberar o primeiro palpite validado pela nutricionista da assessoria.
+- Critério de aceite: aluno não recebe palpite validado sem aceite registrado do TCLE.
+- Prioridade: alta (obrigação profissional vinculada à nutricionista).
+- Origem: Agente BMAD (Winston) + pesquisa jurídica externa (CFN 760/2023). **Não confirmado pela cliente real.**
+
+**RNF-01 — Rastreabilidade e auditabilidade do aceite do TCLE**
+- Descrição: aceite do TCLE registrado de forma auditável (aluno, data, hora), consultável pela nutricionista responsável.
+- Critério de aceite: nutricionista visualiza, por aluno, se e quando o TCLE foi aceito.
+- Prioridade: alta.
+- Origem: idem RF-01. **Não confirmado pela cliente real.**
+
+**Ressalva (Especialista em LGPD):** incerto se aceite digital com timestamp conta como "assinatura" para fins do CFN/CRN — recomenda-se confirmar com advogado ou direto com o CRN, não tratar como resolvido.
+
+### 18. Lista consolidada de requisitos/questões ainda não bem esclarecidos (antes das decisões da seção 19)
+
+1. Suporte offline — lacuna total (onde/quando o aluno usaria o app).
+2. Modelo de distribuição por marca (CNPJ único vs. White Label completo vs. dois tiers).
+3. Arquitetura multiplataforma (nativo x2 vs. framework único).
+4. Sequência de lançamento Android/iOS.
+5. Confirmação, com a cliente, de quem paga a publicação.
+6. Valor exato do limite de alunos pro desconto por volume.
+7. Quanto do valor final é repasse do Palpite vs. preço do treino.
+8. Diferencial competitivo frente a concorrentes reais (Everfit, FitBudd, My PT Hub...).
+9. "IA" como motor de regras determinístico vs. machine learning real, e orçamento/prazo.
+10. Uso comercial de dados de saúde com parceiro de mídia (Zafarin) — risco de violar LGPD.
+11. TCLE — aceite digital conta como assinatura, pra fins do CFN/CRN?
+12. Registro ANVISA (SaMD) — a confirmar formalmente.
+13. Reconfirmar com a cliente o escopo "só assessorias de corrida".
+
+### 19. Decisões tomadas pelo grupo, uma a uma, a partir da lista da seção 18
+
+**Decisão #1 (item 1 — offline):** suporte offline permitido apenas para **visualizar** o último palpite já gerado; nenhum registro/cadastro funciona offline (sincroniza só com conexão). Decisão do grupo, inspirada no padrão de mercado (seção 13); não validada com a cliente.
+
+**Decisão #2 (item 2 — modelo de distribuição):** **app único multi-tenant.** A fundadora publica um único app, disponível para qualquer download; uma assessoria contrata o plano via **contato direto com a fundadora** (não é autosserviço); após contratar, a própria assessoria libera o acesso dentro do app para seus alunos e para sua nutricionista. Descarta o White Label com listagem própria por empresa. Consequências novas (ainda não decididas): onboarding assistido por vendas (não há fluxo de autocadastro de assessoria) e necessidade de um papel de "gestor" com poder de liberar/revogar acesso.
+
+**Decisão #3 (item 3 — arquitetura multiplataforma):** **React Native.** Critérios usados (Winston): custo de terceirização (ela terceiriza o dev; mercado de freelancers/agências React Native é maior e mais barato no Brasil que Flutter), velocidade de atualização contínua (um código-base, alinhado ao desejo dela de manter controle), filosofia de MVP rápido. Nativo x2 descartado por não combinar com o perfil de terceirização dela.
+
+**Decisão #4 (item 4 — sequência de lançamento):** **Android primeiro, depois Apple Store.** Critério: Android detém entre 74% e 81% do market share móvel no Brasil em 2026 (StatCounter); Apple exige Mac, conta de desenvolvedor paga e tem revisão historicamente mais lenta/rigorosa. Mantém o requisito de cobrir os dois SOs, só define a ordem de publicação.
+
+Fontes (decisão #4): [Mobile OS Market Share Brazil — StatCounter](https://gs.statcounter.com/os-market-share/mobile/brazil) · [Android vs iOS Statistics 2026](https://www.tekrevol.com/blogs/android-vs-ios-statistics/)
+
+**Decisão #6 (item 6 — faixas de preço por volume) — escolhida pela IA a pedido do grupo, para validar com a fundadora depois:**
+
+Benchmarks de mercado usados como referência (Good Coach App, TrainHeroic, Trainerize — todos usam 3–4 faixas, com preço por aluno caindo bastante a cada faixa). Combinado com o único dado real da cliente (10 alunos por R$60 = R$6/aluno nessa faixa), a estrutura proposta é:
+
+| Faixa | Alunos | Preço sugerido por aluno |
+|---|---|---|
+| Pequena | até 10 | R$6,00 (dado real da entrevista) |
+| Média | 11–50 | R$4,00 (hipótese, extrapolada do padrão de queda do mercado) |
+| Grande | 51+ | R$2,50 (hipótese, idem) |
+
+**Status:** hipótese escolhida pela IA a pedido explícito do grupo. **Precisa de validação direta com a fundadora** — ela nunca confirmou faixas além do primeiro dado (10 alunos/R$60), e os valores das faixas média/grande são extrapolação de benchmark de mercado internacional, não de pesquisa de preço no Brasil.
+
+Fontes: [Fitness Software Pricing 2026: 30 Platforms Compared](https://trainera.fit/blogs/fitness-software-pricing-index-2026) · [Best Coaching Apps for Endurance Sports 2026](https://goodcoach.app/en/best-coaching-apps) · [Best Nutrition Coaching Software 2026](https://elitecoachinghub.com/blog/best-nutrition-coaching-software-comparison)
+
+---
+
+## Pendências abertas ao final da Parte 2
+
+| # | Pendência | Status |
+|---|-----------|--------|
+| 5 | Confirmar com a cliente quem paga a publicação (decisão do grupo, não validada) | Decidida pelo grupo, pendente de validação |
+| 6 | Faixas de preço por volume (ver decisão #6 acima) | Hipótese da IA, pendente de validação com a fundadora |
+| 7 | Quanto do valor final (R$150–160) é repasse do Palpite vs. preço do treino | Lacuna de precisão |
+| 8 | Diferencial competitivo frente a concorrentes reais nomeados (Everfit, FitBudd, My PT Hub) | Achado de pesquisa, não validado |
+| 9 | "IA" como regra determinística vs. ML, orçamento/prazo | Ambiguidade de termo, não esclarecida |
+| 10 | Uso comercial de dados de saúde com parceiro de mídia (Zafarin) | Risco legal levantado, não resolvido |
+| 11 | TCLE — aceite digital conta como assinatura para fins do CFN/CRN? | Interpretação jurídica incerta |
+| 12 | Registro ANVISA (SaMD) | Achado de pesquisa, a confirmar formalmente |
+| 13 | Reconfirmar com a cliente o escopo "só assessorias de corrida" | Interpretação do grupo, a reconfirmar |
+
 ## Próximos passos
 
-Continuar a sessão de Party Mode na próxima aula a partir dessas pendências, seguindo para o item 7 (verificação final de encerramento) quando o grupo considerar suficiente, e então o item 8 (elaboração do PRD via `$bmad-prd`).
+Continuar a sessão de Party Mode a partir das pendências acima, seguindo para o item 7 (verificação final de encerramento) quando o grupo considerar suficiente, e então o item 8 (elaboração do PRD via `$bmad-prd`).
