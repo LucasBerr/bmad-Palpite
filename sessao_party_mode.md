@@ -294,6 +294,48 @@ Fontes: [Fitness Software Pricing 2026: 30 Platforms Compared](https://trainera.
 | 12 | Registro ANVISA (SaMD) | Achado de pesquisa, a confirmar formalmente |
 | 13 | Reconfirmar com a cliente o escopo "só assessorias de corrida" | Interpretação do grupo, a reconfirmar |
 
+### 20. Resolução em bloco das pendências #5 a #13
+
+O grupo decidiu, de uma vez, tratar as pendências restantes como segue (todas marcadas pelo grupo como "pegue isso como verdade" — ou seja, premissas de trabalho para os artefatos, não necessariamente confirmação literal da cliente real em todos os casos):
+
+- **#5 (quem paga a publicação):** fundadora + sócias. Fechado como premissa de trabalho; **ainda não é confirmação literal da cliente real**.
+- **#6 (faixas de preço):** mantidas as faixas já propostas (até 10 alunos = R$6/aluno; 11–50 = R$4; 51+ = R$2,50).
+- **#7 (repasse Palpite vs. preço do treino):** esclarecido — a tabela de faixas da #6 **é** o modelo de monetização do Palpite (o que a assessoria cobra do aluno final é precificação interna dela, fora do escopo de especificação do produto).
+- **#8 (diferencial competitivo):** descartado como item a validar — o grupo decidiu que não importa para os artefatos.
+- **#9 ("IA" regra vs. ML):** decisão delegada à IA pelo grupo. Decidido: **motor de regras/fórmulas determinístico**, baseado no Guia Alimentar Brasileiro — não machine learning. Justificativa: time atual sem perfil de ML, nenhum orçamento discutido, e o MVP não exige aprendizado, só cálculo nutricional padronizado comparado ao consumo registrado. ML (reconhecimento de imagem, personalização aprendida) permanece no roadmap futuro, já fora do MVP.
+- **#10 (parceria com supermercados, ex. "Zafarin"):** não entra no MVP. Isso também resolve, para esta fase, o risco de LGPD levantado — é decisão de escopo, não análise jurídica completa (revisitar com advogado se a ideia for retomada no futuro).
+- **#11 (TCLE — aceite digital como assinatura):** aceito como válido para os artefatos do trabalho, **com a ressalva explícita de que precisa de revisão por um advogado antes de produção real**. Ressalva mantida junto ao RNF-01.
+- **#12 (ANVISA/SaMD):** confirmado — fica fora do registro por não ser diagnóstico.
+- **#13 (escopo):** reconfirmado — apenas assessorias de corrida.
+
+---
+
+## Item 7 — Encerramento da sessão: verificação final
+
+🎙️ **Facilitador:** Antes de encerrar, rodada final com os participantes — dúvidas, exceções não exploradas, perspectivas não consideradas, conflitos e informações ausentes.
+
+🏢 **Dono de assessoria de corrida:** Uma exceção que não tratamos: **o que acontece se a assessoria atrasar o pagamento da assinatura?** Os alunos perdem acesso imediatamente, ou há um período de carência?
+
+🥗 **Nutricionista da assessoria:** E se o **número de alunos ativos passar da faixa contratada** (ex.: de 10 para 12)? É upgrade automático de faixa, bloqueio de novos cadastros, ou cobrança proporcional?
+
+🏃 **Aluno da assessoria:** E se eu **saio da assessoria no meio do mês** (trocar de academia, parar de treinar)? Meu perfil e histórico de dados continuam? A assessoria consegue revogar meu acesso unilateralmente?
+
+🛡️ **Especialista em LGPD:** Perspectiva que não consideramos ainda: a assessoria, ao revogar o acesso de um aluno, está **excluindo os dados dele ou só bloqueando**? Isso tem implicação direta de LGPD (direito à exclusão).
+
+🎙️ **Facilitador — conflitos:** o único conflito não resolvido que o grupo já havia identificado (modelo multi-tenant vs. White Label com marca própria) foi resolvido pela Decisão #2. Não há conflitos abertos entre personas neste momento.
+
+🎙️ **Facilitador — pendências que permanecem sem resposta ao final da sessão:**
+
+| # | Pendência final | Natureza |
+|---|---|---|
+| A | Confirmar com a cliente real quem paga a publicação (premissa de trabalho, não fato) | Validação pendente |
+| B | Revisão jurídica do aceite digital como assinatura válida para o TCLE | Validação pendente |
+| C | O que acontece em caso de atraso de pagamento da assessoria (suspensão imediata vs. carência) | Exceção levantada no encerramento, não explorada |
+| D | O que acontece quando o número de alunos excede a faixa contratada (upgrade automático, bloqueio, ou cobrança proporcional) | Exceção levantada no encerramento, não explorada |
+| E | O que acontece com os dados do aluno quando ele sai da assessoria/é desvinculado (exclusão vs. bloqueio) | Exceção levantada no encerramento, não explorada — tem implicação de LGPD |
+
+🎙️ **Facilitador:** Com a verificação final feita e essas 5 pendências registradas (ao invés de inventadas sem base), **a sessão de Party Mode está formalmente encerrada.**
+
 ## Próximos passos
 
-Continuar a sessão de Party Mode a partir das pendências acima, seguindo para o item 7 (verificação final de encerramento) quando o grupo considerar suficiente, e então o item 8 (elaboração do PRD via `$bmad-prd`).
+Item 8 — elaboração do PRD via `$bmad-prd`, usando como contexto tudo o que foi registrado nesta sessão (fatos confirmados, decisões do grupo, achados de pesquisa externa e as pendências A–E acima, que devem ser tratadas como hipóteses/pendências no PRD, não como fatos).
