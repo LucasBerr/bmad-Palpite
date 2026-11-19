@@ -99,45 +99,123 @@ flowchart LR
 
 ### Casos de uso detalhados (5 selecionados)
 
+As especificações seguem o modelo de detalhamento de caso de uso do UP/RUP: identificação, descrição, atores, pré e pós-condições e fluxo básico ("caminho feliz"). Os passos do fluxo básico foram extraídos do PRD e do levantamento já registrado neste documento. Cada caso de uso traz ainda critérios de aceitação no formato Dado/Quando/Então — inclusive para os 6 casos de uso do diagrama que não foram detalhados (ver ao final desta seção).
+
 #### UC1 — Cadastrar-se vinculado à Assessoria
-- **Objetivo:** permitir que um convidado se torne Aluno ativo, vinculado ao CNPJ correto.
-- **Atores:** Aluno.
-- **Pré-condições:** o CPF do convidado já deve estar associado a um CNPJ de Assessoria pelo Gestor (UC8).
-- **Fluxo principal:** 1) usuário baixa o app público; 2) informa CPF; 3) sistema confirma vínculo com uma Assessoria; 4) usuário completa dados básicos de conta.
-- **Fluxos alternativos/exceção:** se o CPF não estiver vinculado a nenhuma Assessoria, o cadastro é rejeitado com orientação para contatar a assessoria.
-- **Pós-condições:** Aluno autenticado, vinculado à Assessoria, pronto para preencher o perfil nutricional (UC2).
+
+- **Identificação:** UC1 - Cadastrar-se vinculado à Assessoria
+- **Descrição:** permite que uma pessoa convidada pela Assessoria se cadastre no app público e se torne Aluno ativo, vinculado ao CNPJ correto.
+- **Atores:** Aluno
+- **Pré-condições:** o CPF do convidado já foi vinculado ao CNPJ de uma Assessoria pelo Gestor (UC8); o dispositivo está conectado à internet (nenhum cadastro funciona offline).
+- **Pós-condições:** Aluno autenticado e vinculado à Assessoria, pronto para preencher o perfil nutricional (UC2).
+
+**Fluxo básico:**
+1. Este caso de uso começa quando o Aluno, convidado pela Assessoria, baixa o app público e inicia o cadastro
+2. O Aluno informa seu CPF
+3. O sistema confirma que o CPF está vinculado ao CNPJ de uma Assessoria e mostra esse vínculo ao Aluno
+4. O Aluno completa os dados básicos de conta
+5. O sistema cria a conta do Aluno vinculada à Assessoria e o direciona ao preenchimento do perfil nutricional (UC2)
+
+**Critérios de aceitação:**
+- **CA1.1** — Dado um CPF que não está vinculado a nenhuma Assessoria, quando o usuário tenta se cadastrar, então o cadastro é rejeitado.
+- **CA1.2** — Dado um Aluno recém-cadastrado, quando ele ainda não completou o perfil mínimo (peso, altura, objetivo, atividade física), então não consegue acessar as demais funcionalidades do app.
 
 #### UC3 — Aceitar TCLE
-- **Objetivo:** obter e registrar o consentimento informado do Aluno antes de qualquer validação nutricional.
-- **Atores:** Aluno.
-- **Pré-condições:** cadastro (UC1) e perfil nutricional (UC2) completos.
-- **Fluxo principal:** 1) sistema apresenta o conteúdo do TCLE; 2) Aluno aceita digitalmente; 3) sistema registra aceite com data/hora, de forma auditável.
-- **Fluxos alternativos/exceção:** se o Aluno não aceitar, nenhum palpite pode ser validado para ele (bloqueia UC6 para esse Aluno).
-- **Pós-condições:** aceite do TCLE registrado e consultável pela Nutricionista (UC7).
 
-#### UC4 — Registrar consumo e visualizar Palpite
-- **Objetivo:** permitir que o Aluno registre o que consumiu e, quando validado, veja a recomendação gerada.
-- **Atores:** Aluno.
-- **Pré-condições:** TCLE aceito (UC3).
-- **Fluxo principal:** 1) Aluno registra consumo do dia; 2) motor de regras compara com o recomendado pelo perfil; 3) palpite é gerado como pendente; 4) após validação da Nutricionista (UC6), Aluno visualiza o palpite.
-- **Fluxos alternativos/exceção:** sem conexão, o Aluno só consegue visualizar o último palpite já validado em cache (UC5 offline) — não pode registrar novo consumo até haver internet.
-- **Pós-condições:** novo registro de consumo disponível para geração de palpite; palpite validado visível ao Aluno.
+- **Identificação:** UC3 - Aceitar TCLE
+- **Descrição:** obtém e registra o consentimento informado do Aluno sobre a telenutrição antes de qualquer validação nutricional, conforme a Resolução CFN nº 760/2023.
+- **Atores:** Aluno
+- **Pré-condições:** cadastro (UC1) e perfil nutricional (UC2) completos.
+- **Pós-condições:** aceite do TCLE registrado de forma auditável e consultável pela Nutricionista (UC7); os Palpites do Aluno passam a poder ser validados (UC6).
+
+**Fluxo básico:**
+1. Este caso de uso começa quando o Aluno conclui o preenchimento do perfil nutricional (UC2)
+2. O sistema apresenta o conteúdo do TCLE referente à telenutrição
+3. O Aluno aceita o TCLE digitalmente
+4. O sistema registra o aceite com identificação do Aluno, data e hora, de forma auditável
+
+**Critérios de aceitação:**
+- **CA3.1** — Dado um Aluno que ainda não aceitou o TCLE, quando existe um Palpite gerado para ele, então nenhum Palpite validado é liberado a esse Aluno.
+- **CA3.2** — Dado que o Aluno aceitou o TCLE, quando o aceite é registrado, então o registro contém a identificação do Aluno, a data e a hora do aceite.
+
+#### UC4 — Registrar consumo
+
+- **Identificação:** UC4 - Registrar consumo
+- **Descrição:** permite que o Aluno registre o que consumiu, para que o motor de regras compare com o recomendado para o seu perfil e gere um Palpite.
+- **Atores:** Aluno
+- **Pré-condições:** TCLE aceito (UC3); o dispositivo está conectado à internet (nenhum registro de consumo funciona offline).
+- **Pós-condições:** novo registro de consumo salvo; Palpite gerado como pendente de validação, ainda não visível ao Aluno.
+
+**Fluxo básico:**
+1. Este caso de uso começa quando o Aluno registra o que consumiu no dia
+2. O motor de regras compara o consumo registrado com o recomendado para o perfil do Aluno, segundo o Guia Alimentar Brasileiro
+3. O sistema gera o Palpite marcado como pendente de validação da Nutricionista
+4. O Palpite entra na fila de validação da Nutricionista da Assessoria (UC6)
+
+**Critérios de aceitação:**
+- **CA4.1** — Dado que o dispositivo do Aluno está sem conexão, quando ele tenta registrar um novo consumo, então o registro é bloqueado com aviso até haver conexão.
+- **CA4.2** — Dado um consumo registrado, quando o Palpite é gerado, então ele fica pendente na fila de validação da Nutricionista e não é visível ao Aluno antes de ser validado.
 
 #### UC6 — Validar/ajustar Palpite
-- **Objetivo:** dar respaldo profissional ao palpite antes de ele chegar ao Aluno, conforme exigido pela Resolução CFN nº 760/2023.
-- **Atores:** Nutricionista da Assessoria.
-- **Pré-condições:** palpite gerado pelo motor de regras para um Aluno com TCLE aceito.
-- **Fluxo principal:** 1) Nutricionista abre a fila de palpites pendentes da sua Assessoria; 2) revisa o palpite de cada Aluno; 3) ajusta manualmente quando necessário; 4) aprova.
-- **Fluxos alternativos/exceção:** se o Aluno ainda não aceitou o TCLE, o sistema bloqueia a validação para ele até o aceite existir.
-- **Pós-condições:** palpite aprovado passa a ser visível ao Aluno (UC4/UC5); palpite não aprovado permanece oculto.
+
+- **Identificação:** UC6 - Validar/ajustar Palpite
+- **Descrição:** dá respaldo profissional ao Palpite antes de ele chegar ao Aluno, conforme exigido pela Resolução CFN nº 760/2023.
+- **Atores:** Nutricionista da Assessoria
+- **Pré-condições:** Nutricionista autenticada e vinculada à Assessoria (UC9); Palpite gerado pelo motor de regras (UC4) para um Aluno com TCLE aceito (UC3).
+- **Pós-condições:** o Palpite aprovado passa a ser visível ao Aluno (UC5), que é notificado; Palpite não aprovado permanece oculto.
+
+**Fluxo básico:**
+1. Este caso de uso começa quando a Nutricionista abre a fila de Palpites pendentes de validação da sua Assessoria
+2. A Nutricionista revisa o Palpite gerado pelo motor de regras para cada Aluno, verificando se o TCLE dele já foi aceito
+3. A Nutricionista ajusta manualmente o Palpite, quando julgar necessário
+4. A Nutricionista aprova o Palpite
+5. O sistema torna o Palpite visível ao Aluno e o notifica
+
+**Critérios de aceitação:**
+- **CA6.1** — Dado um Aluno que ainda não aceitou o TCLE, quando a Nutricionista tenta validar o Palpite dele, então o sistema bloqueia a validação até o aceite existir.
+- **CA6.2** — Dado um Palpite que a Nutricionista não aprovou, quando o Aluno acessa o app, então esse Palpite não é visível a ele.
 
 #### UC8 — Convidar/vincular Aluno
-- **Objetivo:** permitir que o Gestor da Assessoria dê acesso funcional a um novo Aluno.
-- **Atores:** Gestor da Assessoria.
+
+- **Identificação:** UC8 - Convidar/vincular Aluno
+- **Descrição:** permite que o Gestor da Assessoria dê acesso funcional a um novo Aluno, vinculando o CPF dele ao CNPJ da Assessoria.
+- **Atores:** Gestor da Assessoria
 - **Pré-condições:** Assessoria já provisionada com CNPJ (UC11).
-- **Fluxo principal:** 1) Gestor informa o CPF do novo Aluno; 2) sistema vincula o CPF ao CNPJ da Assessoria; 3) Aluno convidado pode completar UC1.
-- **Fluxos alternativos/exceção:** `[OPEN QUESTION]` se o número de Alunos ativos exceder a faixa contratada, o comportamento (upgrade automático, bloqueio do convite, ou cobrança proporcional) ainda não foi decidido — ver PRD, Open Question 1.
-- **Pós-condições:** CPF vinculado ao CNPJ, pronto para ativação pelo próprio Aluno.
+- **Pós-condições:** CPF vinculado ao CNPJ da Assessoria, pronto para ativação pelo próprio Aluno (UC1).
+
+**Fluxo básico:**
+1. Este caso de uso começa quando o Gestor informa o CPF do novo Aluno
+2. O sistema vincula o CPF ao CNPJ da Assessoria
+3. O Aluno convidado passa a poder se cadastrar no app público (UC1), aparecendo já vinculado à Assessoria
+
+**Critérios de aceitação:**
+- **CA8.1** — Dado um CPF convidado pelo Gestor, quando o vínculo ainda não foi confirmado, então esse CPF não tem acesso funcional ao app.
+- **CA8.2** — Dado um CPF vinculado pelo Gestor ao CNPJ da Assessoria, quando o Aluno se autentica no app público, então ele já aparece vinculado a essa Assessoria.
+
+#### Critérios de aceitação dos demais casos de uso
+
+**UC2 — Preencher perfil nutricional**
+- **CA2.1** — Dado um Aluno cadastrado, quando ele altera peso, altura, objetivo, atividade física/esporte praticado ou frequência de compra, então a próxima geração de Palpite usa o perfil atualizado.
+- **CA2.2** — Dado que o dispositivo do Aluno está sem conexão, quando ele tenta editar o perfil, então a edição é bloqueada com aviso até haver conexão.
+
+**UC5 — Visualizar Palpite**
+- **CA5.1** — Dado um Palpite validado pela Nutricionista, quando o Aluno o visualiza, então ele é apresentado com o aviso de que não substitui orientação profissional e de que os valores são aproximados.
+- **CA5.2** — Dado que o dispositivo do Aluno está sem conexão, quando ele abre o app, então consegue ver o último Palpite validado já sincronizado.
+
+**UC7 — Consultar aceite de TCLE**
+- **CA7.1** — Dado um Aluno da Assessoria, quando a Nutricionista consulta o TCLE dele, então ela vê se e quando o termo foi aceito.
+- **CA7.2** — Dado que a Nutricionista está vinculada a uma Assessoria, quando ela consulta aceites de TCLE, então vê apenas os Alunos da sua própria Assessoria.
+
+**UC9 — Convidar/vincular Nutricionista**
+- **CA9.1** — Dado o CPF da Nutricionista, quando o Gestor a convida, então o CPF é vinculado ao CNPJ da Assessoria e só ganha acesso funcional após o vínculo ser confirmado.
+- **CA9.2** — Dado uma Nutricionista vinculada, quando ela acessa a fila de validação, então vê apenas os Palpites pendentes dos Alunos da sua Assessoria.
+
+**UC10 — Revogar acesso**
+- **CA10.1** — Dado um Aluno ou uma Nutricionista vinculado à Assessoria, quando o Gestor revoga o acesso, então essa pessoa deixa de ter acesso funcional à conta da Assessoria.
+
+**UC11 — Provisionar Assessoria (CNPJ)**
+- **CA11.1** — Dado um contrato comercial fechado com a Fundadora, quando a Assessoria é provisionada, então ela recebe um CNPJ provisionado e um perfil de Gestor.
+- **CA11.2** — Dado que não há autosserviço, quando uma assessoria tenta se cadastrar diretamente pelo app, então não consegue criar uma conta de Assessoria sem o provisionamento feito pela Fundadora.
 
 ---
 
