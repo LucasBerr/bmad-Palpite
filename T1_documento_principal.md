@@ -138,8 +138,6 @@ As especificações seguem o modelo de detalhamento de caso de uso do UP/RUP: id
 - **CA3.1** — Dado um Aluno que ainda não aceitou o TCLE, quando existe um Palpite gerado para ele, então nenhum Palpite validado é liberado a esse Aluno.
 - **CA3.2** — Dado que o Aluno aceitou o TCLE, quando o aceite é registrado, então o registro contém a identificação do Aluno, a data e a hora do aceite.
 
-- **Observação:** `[OPEN QUESTION]` validade jurídica do aceite digital com timestamp — ver PRD, Open Question 2.
-
 #### UC4 — Registrar consumo
 
 - **Identificação:** UC4 - Registrar consumo
@@ -194,8 +192,6 @@ As especificações seguem o modelo de detalhamento de caso de uso do UP/RUP: id
 - **CA8.1** — Dado um CPF convidado pelo Gestor, quando o vínculo ainda não foi confirmado, então esse CPF não tem acesso funcional ao app.
 - **CA8.2** — Dado um CPF vinculado pelo Gestor ao CNPJ da Assessoria, quando o Aluno se autentica no app público, então ele já aparece vinculado a essa Assessoria.
 
-- **Observação:** `[OPEN QUESTION]` comportamento quando o número de Alunos ativos excede a Faixa de alunos contratada (upgrade automático, bloqueio do convite ou cobrança proporcional) — ver PRD, Open Question 1.
-
 #### Critérios de aceitação dos demais casos de uso
 
 **UC2 — Preencher perfil nutricional**
@@ -216,7 +212,6 @@ As especificações seguem o modelo de detalhamento de caso de uso do UP/RUP: id
 
 **UC10 — Revogar acesso**
 - **CA10.1** — Dado um Aluno ou uma Nutricionista vinculado à Assessoria, quando o Gestor revoga o acesso, então essa pessoa deixa de ter acesso funcional à conta da Assessoria.
-- **CA10.2** — `[OPEN QUESTION]` o tratamento dos dados de um Aluno desvinculado (exclusão ou bloqueio) ainda não foi decidido e tem implicação de LGPD; o critério será definido após a resposta à Open Question 3 do PRD.
 
 **UC11 — Provisionar Assessoria (CNPJ)**
 - **CA11.1** — Dado um contrato comercial fechado com a Fundadora, quando a Assessoria é provisionada, então ela recebe um CNPJ provisionado e um perfil de Gestor.
